@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FIR Documents</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <aside class="sidebar">
+
+    <div class="sidebar-brand">
+        <div class="logo-icon">F</div>
+
+        <div>
+            <h2>FIR Manager</h2>
+            <p>Document Management System</p>
+        </div>
+    </div>
+
+    <nav class="sidebar-nav">
+        <a href="index.html" class="nav-link">
+            Dashboard
+        </a>
+
+        <a href="fir-documents.html" class="nav-link active">
+            FIR Documents
+        </a>
+
+        <a href="tracking.html" class="nav-link">
+            Tracking
+        </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+        <button class="logout-btn" onclick="logoutUser()">
+            Logout
+        </button>
+    </div>
+
+</aside>
+
+
+    <main class="main-container">
+
+        <section id="firDocuments" class="documents-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2 class="section-title">
+                        FIR Documents
+                    </h2>
+
+                    <p class="section-description">
+                        View, search and manage uploaded FIR documents.
+                    </p>
+
+                </div>
+
+        
+
+            </div>
+
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search FIR by FIR number..."
+                    onkeyup="searchFIR()"
+                >
+
+                <button onclick="searchFIR()">
+                    Search
+                </button>
+
+            </div>
+
+
+            <div id="firList" class="fir-list">
+
+                <p class="empty">
+                    Loading FIR documents...
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script type="module" src="script.js"></script>
+
+</body>
+
+</html>
+
+

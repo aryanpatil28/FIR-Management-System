@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>📝 FIR Manager - Register</title>
+
+    <link rel="stylesheet" href="register.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="register-header">
+
+        <div class="logo">
+            🛡️ FIR Manager
+        </div>
+
+        <div class="header-text">
+            📋 FIR Management System
+        </div>
+
+    </header>
+
+    <!-- Main -->
+    <main class="register-container">
+
+        <div class="register-box">
+
+            <div class="register-icon">
+                👤
+            </div>
+
+            <h1>Create Account ✨</h1>
+
+            <p class="register-subtitle">
+                📝 Create a secure account to manage FIR documents
+            </p>
+
+            <form id="registerForm">
+
+                <div class="input-group">
+
+                    <label for="name">
+                        👤 Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                </div>
+
+                <div class="input-group">
+
+                    <label for="email">
+                        📧 Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+                <div class="input-group">
+
+                    <label for="password">
+                        🔑 Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Create a password"
+                        minlength="6"
+                        required
+                    >
+
+                </div>
+
+                <div class="input-group">
+
+                    <label for="confirmPassword">
+                        🔐 Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm your password"
+                        minlength="6"
+                        required
+                    >
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="register-btn"
+                >
+                    📝 Create Account
+                </button>
+
+            </form>
+
+            <p class="login-text">
+
+                🔐 Already have an account?
+
+                <a href="login.html">
+                    Login Here →
+                </a>
+
+            </p>
+
+        </div>
+
+    </main>
+
+    <script type="module">
+
+        import { supabase } from "./supabase.js";
+
+        const registerForm =
+            document.getElementById("registerForm");
+
+        registerForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+                const name =
+                    document
+                        .getElementById("name")
+                        .value
+                        .trim();
+
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
+
+                const password =
+                    document
+                        .getElementById("password")
+                        .value;
+
+                const confirmPassword =
+                    document
+                        .getElementById("confirmPassword")
+                        .value;
+
+                if (password !== confirmPassword) {
+
+                    alert(
+                        "❌ Passwords do not match."
+                    );
+
+                    return;
+                }
+
+                try {
+
+                    const { data, error } =
+                        await supabase.auth.signUp({
+
+                            email: email,
+
+                            password: password,
+
+                            options: {
+                                data: {
+                                    full_name: name
+                                }
+                            }
+
+                        });
+
+                    if (error) {
+
+                        alert(
+                            "❌ Registration failed:\n\n" +
+                            error.message
+                        );
+
+                        return;
+                    }
+
+                    alert(
+                        "✅ Registration successful!\n\n" +
+                        "You can now login to FIR Manager."
+                    );
+
+                    window.location.href =
+                        "login.html";
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    alert(
+                        "⚠️ Something went wrong:\n\n" +
+                        error.message
+                    );
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
+

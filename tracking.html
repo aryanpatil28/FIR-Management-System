@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FIR Tracking</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+    <div class="sidebar-brand">
+        <div class="logo-icon">F</div>
+
+        <div>
+            <h2>FIR Manager</h2>
+            <p>Document Management System</p>
+        </div>
+    </div>
+
+    <nav class="sidebar-nav">
+        <a href="index.html" class="nav-link">
+            Dashboard
+        </a>
+
+        <a href="fir-documents.html" class="nav-link">
+            FIR Documents
+        </a>
+
+        <a href="tracking.html" class="nav-link active">
+            Tracking
+        </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+        <button class="logout-btn" onclick="logoutUser()">
+            Logout
+        </button>
+    </div>
+
+</aside>
+
+
+    <main class="main-container">
+
+    <section id="tracking" class="tracking-section">
+
+            <h2 class="section-title">
+                FIR Tracking
+            </h2>
+
+            <p class="section-description">
+                Track the current status and priority of your FIR documents
+                from the FIR Documents section.
+            </p>
+
+
+            <!-- STATUS INFORMATION -->
+
+            <div class="tracking-info">
+
+    <div class="tracking-status-card">
+
+        <strong>
+            <span class="tracking-dot filed"></span>
+            Filed
+        </strong>
+
+        <p>
+            Newly registered FIR
+        </p>
+
+        <h3 id="trackingFiledCount">
+            0 FIRs
+        </h3>
+
+    </div>
+
+
+    <div class="tracking-status-card">
+
+        <strong>
+            <span class="tracking-dot investigation"></span>
+            Investigation
+        </strong>
+
+        <p>
+            FIR currently under investigation
+        </p>
+
+        <h3 id="trackingInvestigationCount">
+            0 FIRs
+        </h3>
+
+    </div>
+
+
+    <div class="tracking-status-card">
+
+        <strong>
+            <span class="tracking-dot pending"></span>
+            Pending
+        </strong>
+
+        <p>
+            Further action required
+        </p>
+
+        <h3 id="trackingPendingCount">
+            0 FIRs
+        </h3>
+
+    </div>
+
+
+    <div class="tracking-status-card">
+
+        <strong>
+            <span class="tracking-dot closed"></span>
+            Closed
+        </strong>
+
+        <p>
+            Case has been closed
+        </p>
+
+        <h3 id="trackingClosedCount">
+            0 FIRs
+        </h3>
+
+    </div>
+
+</div>
+
+
+            <!-- ================= FIR TRACKING RECORDS ================= -->
+
+            <div class="tracking-records">
+
+                <div class="tracking-records-header">
+
+                    <div>
+
+                        <h3>
+                            📋 FIR Tracking Records
+                        </h3>
+
+                        <p>
+                            Live status and priority of uploaded FIR documents.
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="secondary-btn"
+                        onclick="loadTracking()"
+                    >
+                        🔄 Refresh
+                    </button>
+
+                </div>
+
+
+                <!-- REAL TABLE -->
+
+                <div class="tracking-table-container">
+
+                    <table class="tracking-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>FIR Number</th>
+                                <th>File Name</th>
+                                <th>Status</th>
+                                <th>Priority</th>
+                                <th>Date</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="trackingList">
+
+                            <tr>
+
+                                <td
+                                    colspan="5"
+                                    class="tracking-empty"
+                                >
+                                    Loading FIR tracking records...
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script type="module" src="script.js"></script>
+
+</body>
+
+</html>

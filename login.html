@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>🔐 FIR Manager - Login</title>
+
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="login-header">
+
+        <div class="logo">
+            🛡️ FIR Manager
+        </div>
+
+        <div class="header-text">
+            📋 FIR Management System
+        </div>
+
+    </header>
+
+    <!-- Main -->
+    <main class="login-container">
+
+        <div class="login-box">
+
+            <div class="login-icon">
+                🔐
+            </div>
+
+            <h1>Welcome Back 👋</h1>
+
+            <p class="login-subtitle">
+                🔒 Securely login to your FIR Management System
+            </p>
+
+            <form id="loginForm">
+
+                <div class="input-group">
+
+                    <label for="email">
+                        📧 Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+                <div class="input-group">
+
+                    <label for="password">
+                        🔑 Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+                <button type="submit" class="login-btn">
+                    🔐 Login Securely
+                </button>
+
+            </form>
+
+            <p class="register-text">
+                👤 Don't have an account?
+                <a href="register.html">
+                    Create Account ✨
+                </a>
+            </p>
+
+        </div>
+
+    </main>
+
+    <script type="module">
+
+        import { supabase } from "./supabase.js";
+
+        const loginForm =
+            document.getElementById("loginForm");
+
+        loginForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
+
+                const password =
+                    document
+                        .getElementById("password")
+                        .value;
+
+                try {
+
+                    const { data, error } =
+                        await supabase.auth.signInWithPassword({
+                            email: email,
+                            password: password
+                        });
+
+                    if (error) {
+
+                        alert(
+                            "❌ Login failed: " +
+                            error.message
+                        );
+
+                        return;
+                    }
+
+                    alert(
+                        "✅ Login successful!\n\n" +
+                        "Welcome to FIR Manager."
+                    );
+
+                    window.location.href =
+                        "index.html";
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    alert(
+                        "⚠️ Something went wrong:\n\n" +
+                        error.message
+                    );
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
+

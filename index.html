@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FIR Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <aside class="sidebar">
+
+    <div class="sidebar-brand">
+        <div class="logo-icon">F</div>
+
+        <div>
+            <h2>FIR Manager</h2>
+            <p>Document Management System</p>
+        </div>
+    </div>
+
+    <nav class="sidebar-nav">
+        <a href="index.html" class="nav-link active">
+            Dashboard
+        </a>
+
+        <a href="fir-documents.html" class="nav-link">
+            FIR Documents
+        </a>
+
+        <a href="tracking.html" class="nav-link">
+            Tracking
+        </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+        <button class="logout-btn" onclick="logoutUser()">
+            Logout
+        </button>
+    </div>
+
+</aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main-container">
+
+        <!-- ================= HERO ================= -->
+
+        <section class="hero">
+
+            <div>
+
+                <h1>AI-Powered FIR Document Management</h1>
+
+                <p>
+                    Securely manage, analyze and track FIR documents
+                    using cloud storage and AI.
+                </p>
+
+            </div>
+
+            <button class="hero-upload-btn" onclick="openUpload()">
+                + Upload FIR
+            </button>
+
+        </section>
+
+
+        <!-- ================= DASHBOARD ================= -->
+        <!-- FIR STATUS GRAPH -->
+<section class="fir-chart-section">
+    <div class="fir-chart-header">
+        <h2>FIR Status Overview</h2>
+        <p>Current distribution of FIR documents by status</p>
+    </div>
+
+    <div class="fir-chart-container">
+        <canvas id="firStatusChart"></canvas>
+    </div>
+</section>
+        <section id="dashboard">
+
+            <h2 class="section-title">Dashboard</h2>
+
+            <div class="dashboard-cards">
+
+                <div class="dashboard-card">
+
+                    <div class="card-icon blue">📄</div>
+
+                    <div>
+                        <p>Total FIRs</p>
+                        <h2 id="totalFIRs">0</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-card">
+
+                    <div class="card-icon red">⚠</div>
+
+                    <div>
+                        <p>High Priority</p>
+                        <h2 id="highPriority">0</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-card">
+
+                    <div class="card-icon orange">🔍</div>
+
+                    <div>
+                        <p>Investigation</p>
+                        <h2 id="investigation">0</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-card">
+
+                    <div class="card-icon green">✓</div>
+
+                    <div>
+                        <p>Closed</p>
+                        <h2 id="closed">0</h2>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ================= TRACKING ================= -->
+
+
+
+        <!-- ================= AI ANALYSIS ================= -->
+        <section id="aiAnalysis" class="ai-section">
+
+            <div class="ai-section-content">
+
+                <div>
+
+                    <h2 class="section-title">
+                        AI Analysis
+                    </h2>
+
+                    <p class="section-description">
+                        Use AI to summarize, segment and analyze FIR documents.
+                    </p>
+
+                </div>
+
+                <button
+                    class="ai-main-btn"
+                    onclick="openAIAnalysis()"
+                >
+                    Open AI Analysis
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= UPLOAD MODAL ================= -->
+
+    <div id="uploadModal" class="modal">
+
+        <div class="modal-box">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h2>
+                        Upload FIR Document
+                    </h2>
+
+                    <p>
+                        Add a new FIR document to the system.
+                    </p>
+
+                </div>
+
+                <button
+                    class="close-btn"
+                    onclick="closeUpload()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="firNumber">
+                    FIR Number
+                </label>
+
+                <input
+                    type="text"
+                    id="firNumber"
+                    placeholder="Enter FIR number"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="firFile">
+                    FIR Document
+                </label>
+
+                <input
+                    type="file"
+                    id="firFile"
+                    accept=".pdf,.txt"
+                >
+
+                <small>
+                    Supported formats: PDF and TXT
+                </small>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    class="secondary-btn"
+                    onclick="closeUpload()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    class="primary-btn"
+                    onclick="uploadFIR()"
+                >
+                    Upload FIR
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= AI ANALYSIS MODAL ================= -->
+
+    <div id="aiAnalysisModal" class="modal">
+
+        <div class="modal-box ai-modal-box">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h2>
+                        AI Analysis
+                    </h2>
+
+                    <p>
+                        Select an AI feature and an FIR document.
+                    </p>
+
+                </div>
+
+                <button
+                    class="close-btn"
+                    onclick="closeAIAnalysis()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="ai-feature-section">
+
+                <h3>
+                    Select AI Feature
+                </h3>
+
+                <div class="ai-feature-grid">
+
+                    <button
+                        class="ai-feature-btn"
+                        data-feature="summary"
+                        onclick="selectAIFeature('summary')"
+                    >
+                        <span>📋</span>
+
+                        <strong>
+                            Case Summary
+                        </strong>
+
+                        <small>
+                            Generate a summary of the FIR
+                        </small>
+                    </button>
+
+
+                    <button
+                        class="ai-feature-btn"
+                        data-feature="segmentation"
+                        onclick="selectAIFeature('segmentation')"
+                    >
+                        <span>🧩</span>
+
+                        <strong>
+                            FIR Segmentation
+                        </strong>
+
+                        <small>
+                            Organize FIR information
+                        </small>
+                    </button>
+
+
+                    <button
+                        class="ai-feature-btn"
+                        data-feature="priority"
+                        onclick="selectAIFeature('priority')"
+                    >
+                        <span>⚠</span>
+
+                        <strong>
+                            Priority Analysis
+                        </strong>
+
+                        <small>
+                            Analyze FIR priority
+                        </small>
+                    </button>
+
+
+                    <button
+                        class="ai-feature-btn"
+                        data-feature="evidence"
+                        onclick="selectAIFeature('evidence')"
+                    >
+                        <span>🔗</span>
+
+                        <strong>
+                            Evidence Cross-Reference
+                        </strong>
+
+                        <small>
+                            Compare FIR records
+                        </small>
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="selected-feature-box">
+
+                <span>
+                    Selected Feature
+                </span>
+
+                <strong id="selectedAIFeature">
+                    Select AI Feature
+                </strong>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="aiFIRSelect">
+                    Select FIR Document
+                </label>
+
+                <select
+                    id="aiFIRSelect"
+                    onchange="selectAIFIR(this.value)"
+                >
+
+                    <option value="">
+                        -- Select FIR --
+                    </option>
+
+                </select>
+
+                <small>
+                    Uploaded FIR documents will appear here automatically.
+                </small>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    class="secondary-btn"
+                    onclick="closeAIAnalysis()"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    class="ai-main-btn"
+                    onclick="startAIAnalysis()"
+                >
+                    Analyze FIR
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= AI RESULT MODAL ================= -->
+
+    <div id="aiResultModal" class="modal">
+
+        <div class="modal-box ai-result-box">
+
+            <div class="modal-header">
+
+                <h2 id="aiResultTitle">
+                    AI Result
+                </h2>
+
+                <button
+                    class="close-btn"
+                    onclick="closeAIResult()"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div
+                id="aiResultContent"
+                class="ai-result-content"
+            >
+                AI result will appear here.
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    class="primary-btn"
+                    onclick="closeAIResult()"
+                >
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="script.js"></script>
+
+</body>
+
+</html>
